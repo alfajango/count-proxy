@@ -44,3 +44,18 @@ setJSON({
   }
 });
 ```
+
+## Running script
+
+To run the script, make sure it's executable:
+
+```
+sudo chmod u+x bin/get_counts
+```
+
+Then run it, be sure that your `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`
+variables are present in your environment:
+
+```
+AWS_ACCESS_KEY={YOUR_ACCESS_KEY_HERE} AWS_SECRET_KEY={YOUR_SECRET_KEY_HERE} bin/get_counts
+```

@@ -1,3 +1,9 @@
+#!/usr/bin/env ruby
+
+# Use Bundler to use correct gems/dependencies
+require "rubygems"
+require "bundler/setup"
+
 require 'open-uri'
 require 'json'
 require 'openssl'
@@ -96,7 +102,7 @@ File.open(FILENAME, 'w') { |f|
   f.write('setJSON(' + output.to_json + ');')
 }
 
-puts "Uploading to S3 bucket #{S3_BUCKET}..."
+puts "Uploading to #{S3_FILENAME} in S3 bucket #{S3_BUCKET}..."
 AWS::S3::Base.establish_connection!(
   :access_key_id     => ENV['AWS_ACCESS_KEY'],
   :secret_access_key => ENV['AWS_SECRET_KEY']
