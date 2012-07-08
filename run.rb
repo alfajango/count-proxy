@@ -1,7 +1,6 @@
 require 'open-uri'
 require 'json'
 require 'openssl'
-require 'logger'
 require 'aws/s3'
 
 # Hack to skip ssl certificate validation error with github api
@@ -60,16 +59,14 @@ PROJECTS = {
   }
 }
 
-LOGGER = Logger.new("#{FILENAME}.log", 'monthly')
-
-LOGGER.info "Starting import..."
+puts "Starting import..."
 
 output = {}.tap do |out|
   PROJECTS.each do |project, project_hash|
-    LOGGER.debug "for #{project}"
+    print "  #{project}:"
     out[project.to_s] = {}
     project_hash[:services].each do |service, value|
-      LOGGER.debug"[#{service}]"
+      print " [#{service}]"
       uri = case
       when service == :rubygems
         "http://rubygems.org/api/v1/downloads/#{value}.json"
@@ -85,20 +82,21 @@ output = {}.tap do |out|
 
         out[project.to_s][service.to_s] = parsed_json.select { |k,v| %w(watchers forks total_downloads).include?(k) }
       rescue Exception => e
-        LOGGER.error "Encountered exception, skipping #{project}[#{service}]: #{e}"
+        puts "\nEncountered exception, skipping #{project}[#{service}]: #{e}"
         next
       end
     end
+    puts ""
     sleep SLEEP
   end
 end
 
-LOGGER.debug "Writing file"
+puts "Writing file #{FILENAME}..."
 File.open(FILENAME, 'w') { |f|
   f.write('setJSON(' + output.to_json + ');')
 }
 
-LOGGER.info "Uploading to S3..."
+puts "Uploading to S3 bucket #{S3_BUCKET}..."
 AWS::S3::Base.establish_connection!(
   :access_key_id     => ENV['AWS_ACCESS_KEY'],
   :secret_access_key => ENV['AWS_SECRET_KEY']
@@ -111,4 +109,4 @@ AWS::S3::S3Object.store(
   access: :public_read
 )
 
-LOGGER.info "Done!"
+puts "Done!"
