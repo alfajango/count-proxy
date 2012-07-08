@@ -57,5 +57,34 @@ Then run it, be sure that your `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`
 variables are present in your environment:
 
 ```
-AWS_ACCESS_KEY={YOUR_ACCESS_KEY_HERE} AWS_SECRET_KEY={YOUR_SECRET_KEY_HERE} bin/get_counts
+AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY_HERE AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY_HERE bin/get_counts
+```
+
+## Setting up on Heroku
+
+You'll want to put the script somewhere on a server (or just set it up
+locally), so that it can run on a scheduled cron job to update the
+download counts and rewrite the file on S3.
+
+The easiest place to deploy this script to is probably Heroku.
+
+Just clone this repo from Github, and create a new app on Heroku's Cedar
+stack with the heroku gem:
+
+```
+heroku apps:create my-count-proxy
+git push heroku
+```
+
+Then add your Amazon Web Services access key and secret key to Heroku's
+environment config for the app:
+
+```
+heroku config:add AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY_HERE AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY_HERE
+```
+
+To test the script on heroku:
+
+```
+heroku run get_counts
 ```
