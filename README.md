@@ -88,3 +88,20 @@ To test the script on heroku:
 ```
 heroku run get_counts
 ```
+
+Now, let's setup Heroku's "scheduler" addon (previously called the "cron" addon):
+
+```
+heroku addons:add scheduler:standard
+```
+
+And set it up to run however often we'd like:
+
+```
+heroku addons:open scheduler
+```
+
+The above will open the Heroku scheduler dashboard in your browser,
+where you can click "Add job...", type in `get_counts`, and select your
+frequency (probably daily, or at most hourly, if possible, to minimize
+impact on venders' available API resources).
