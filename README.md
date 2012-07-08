@@ -47,6 +47,10 @@ setJSON({
 
 ## Running script
 
+First, update the top of the script with your own settings for the projects and
+services you want to import, as well as with your own S3 bucket name and
+desired filenames.
+
 To run the script, make sure it's executable:
 
 ```
