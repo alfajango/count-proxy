@@ -62,6 +62,11 @@ PROJECTS = {
     services: {
       github: 'JangoSteve/Rails-jQuery-Demo'
     }
+  },
+  :'websockets-demo' => {
+    services: {
+      github: 'JangoSteve/websockets-demo'
+    }
   }
 }
 
