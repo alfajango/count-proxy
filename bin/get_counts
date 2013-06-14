@@ -67,6 +67,11 @@ PROJECTS = {
     services: {
       github: 'JangoSteve/websockets-demo'
     }
+  },
+  :'foundation-mobile' => {
+    services: {
+      github: 'alfajango/foundation-mobile'
+    }
   }
 }
 
