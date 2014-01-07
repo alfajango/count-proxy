@@ -43,7 +43,7 @@ PROJECTS = {
   },
   dynatable: {
     services: {
-      github: 'JangoSteve/jquery-dynatable',
+      github: 'alfajango/jquery-dynatable',
       jspkg: 'dynatable'
     }
   },
