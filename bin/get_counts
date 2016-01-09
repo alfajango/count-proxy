@@ -90,7 +90,7 @@ output = {}.tap do |out|
       print " [#{service}]"
       uri = case
       when service == :rubygems
-        "http://rubygems.org/api/v1/downloads/#{value}.json"
+        "https://rubygems.org/api/v1/downloads/#{value}.json"
       when service == :jspkg
         "http://jspkg.com/packages/#{value}/downloads.json"
       when service == :github
