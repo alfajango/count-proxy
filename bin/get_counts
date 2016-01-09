@@ -72,6 +72,11 @@ PROJECTS = {
     services: {
       github: 'alfajango/foundation-mobile'
     }
+  },
+  :'redmine-cashboard-tasks' => {
+    services: {
+      github: 'alfajango/redmine-cashboard-tasks'
+    }
   }
 }
 
